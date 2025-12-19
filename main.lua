@@ -1,6 +1,6 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-local Window = Rayfield:CreateWindow({
+local Window = Jiro Hub:CreateWindow({
    Name = "Fcyksa TR x Jiro Hub",
    LoadingTitle = "The Wind Rises...",
    LoadingSubtitle = "by Fcyksa TR",
