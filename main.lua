@@ -2,28 +2,24 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
    Name = "Fcyksa TR x Jiro Hub",
-   LoadingTitle = "Fcyksa TR x Jiro Hub", -- Ini yang akan muncul pas intro awal
-   LoadingSubtitle = "by Fcyksa TR",       -- Sub-teks di bawah judul intro
+   LoadingTitle = "Fcyksa TR x Jiro Hub",
+   LoadingSubtitle = "by faksatrs",
    ConfigurationSaving = {
       Enabled = true,
       FolderName = "FcyksaJiro",
       FileName = "FishItConfig"
    },
-   Theme = "Green",
-   
-   -- Menghilangkan notifikasi promosi Rayfield
-   DisableRayfieldPrompts = true, 
-   
-   CloseSideBarTitle = "Jiro Hub",
+   Theme = "Green", -- Warna Hijau Ghibli
+   CloseSideBarTitle = "Jiro Hub", -- Nama saat menu ditutup
    CloseSideBarIcon = 4483362458,
-})  -- Ikon estetik saat menu ditutup
 })
 
-local Tab = Window:CreateTab("Fishing", 4483362458)
+-- [[ TAB FISHING ]]
+local FishingTab = Window:CreateTab("Fishing", 4483362458)
 
-Tab:CreateSection("Blatant Features [BETA]")
+FishingTab:CreateSection("Main Features")
 
-Tab:CreateToggle({
+FishingTab:CreateToggle({
    Name = "Blatant Fishing",
    CurrentValue = false,
    Callback = function(Value)
@@ -43,17 +39,61 @@ Tab:CreateToggle({
    end,
 })
 
--- TAB TAMBAHAN BIAR MENU TIDAK KOSONG
+-- [[ TAB AUTOMATION ]]
+local AutoTab = Window:CreateTab("Automation", 4483362458)
+
+AutoTab:CreateToggle({
+   Name = "Auto Sell Fish",
+   CurrentValue = false,
+   Callback = function(Value)
+      _G.AutoSell = Value
+      -- Logika Auto Sell bisa kamu tambahkan di sini sesuai remote game
+   end,
+})
+
+-- [[ TAB PLAYER ]]
+local PlayerTab = Window:CreateTab("Player", 4483362458)
+
+PlayerTab:CreateSlider({
+   Name = "Walkspeed",
+   Range = {16, 300},
+   Increment = 1,
+   Suffix = "Speed",
+   CurrentValue = 16,
+   Flag = "WS", 
+   Callback = function(Value)
+      game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+   end,
+})
+
+PlayerTab:CreateButton({
+   Name = "Infinite Jump",
+   Callback = function()
+      game:GetService("UserInputService").JumpRequest:Connect(function()
+          game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+      end)
+   end,
+})
+
+-- [[ TAB MISC ]]
 local MiscTab = Window:CreateTab("Misc", 4483362458)
+
 MiscTab:CreateButton({
    Name = "Anti-AFK",
    Callback = function()
-      -- Fitur agar tidak terkena kick saat diam lama
       local vu = game:GetService("VirtualUser")
       game:GetService("Players").LocalPlayer.Idled:Connect(function()
          vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
          wait(1)
          vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
       end)
+      Rayfield:Notify({Title = "Success", Content = "Anti-AFK Enabled", Duration = 3})
+   end,
+})
+
+MiscTab:CreateButton({
+   Name = "Destroy UI",
+   Callback = function()
+      Rayfield:Destroy()
    end,
 })
