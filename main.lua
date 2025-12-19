@@ -1,19 +1,22 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-local Window = JiroHub:CreateWindow({
+local Window = Rayfield:CreateWindow({
    Name = "Fcyksa TR x Jiro Hub",
-   LoadingTitle = "The Wind Rises...",
-   LoadingSubtitle = "by Fcyksa TR",
+   LoadingTitle = "Fcyksa TR x Jiro Hub", -- Ini yang akan muncul pas intro awal
+   LoadingSubtitle = "by Fcyksa TR",       -- Sub-teks di bawah judul intro
    ConfigurationSaving = {
       Enabled = true,
       FolderName = "FcyksaJiro",
       FileName = "FishItConfig"
    },
-   Theme = "Green", -- Memperbaiki warna agar menjadi Hijau Ghibli
+   Theme = "Green",
    
-   -- MEMPERBAIKI NAMA SAAT CLOSE MENU
-   CloseSideBarTitle = "Jiro Hub", -- Mengganti teks 'Rayfield' saat menu ditutup
-   CloseSideBarIcon = 4483362458  -- Ikon estetik saat menu ditutup
+   -- Menghilangkan notifikasi promosi Rayfield
+   DisableRayfieldPrompts = true, 
+   
+   CloseSideBarTitle = "Jiro Hub",
+   CloseSideBarIcon = 4483362458,
+})  -- Ikon estetik saat menu ditutup
 })
 
 local Tab = Window:CreateTab("Fishing", 4483362458)
